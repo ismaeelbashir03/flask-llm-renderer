@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Live JSON Viewer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+</head>
+<body class="bg-gray-100 p-6">
+  <h1 class="text-2xl font-bold mb-4">Live Response</h1>
+  <div id="output" class="max-w-screen-lg mx-auto space-y-6"></div>
+
+  <script>
+    const socket = io();
+  
+    socket.on('update_page', (data) => {
+      const output = document.getElementById('output');
+      output.innerHTML = data.html;
+  
+      const scripts = output.querySelectorAll('script');
+      scripts.forEach(oldScript => {
+        const newScript = document.createElement('script');
+        if (oldScript.src) {
+          newScript.src = oldScript.src;
+        } else {
+          newScript.textContent = oldScript.textContent;
+        }
+        document.body.appendChild(newScript);
+        oldScript.remove();
+      });
+    });
+  </script>
+  
+</body>
+</html>
