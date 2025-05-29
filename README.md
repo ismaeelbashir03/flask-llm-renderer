@@ -4,6 +4,8 @@
 
 Another project on my journey to never write frontend code again. This is a decorator for Flask that allows you to render HTML from any recieved json response to a HTML page, that is updated in real-time to a server through websockets. (99 percent of this project was spent refining the html prompt :D)
 
+Note: initial render is super slow for flask root view (probably due to eventlet and anthropic api conflict, silly bug), but after its ok :(
+
 ## Installation
 We can either `pip install flask_llm_renderer` the package from PyPI or clone the repository and install it manually:
 ```bash
